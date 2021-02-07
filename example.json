@@ -1,0 +1,50 @@
+{
+  "globalHeaders": { "Content-Size": 100 },
+  "endpoint": [
+    {
+      "endpoint": "/api/test3",
+      "method": "get",
+      "localHeaders": {
+        "Content-Type": "application/json"
+      },
+
+      "status_code": 200,
+      "response": { "name": "ABC", "age": 19 }
+    }
+  ],
+
+  "groups": [
+    {
+      "name": "api",
+      "endpoints": [
+        {
+          "method": "get",
+          "endpoint": "test1",
+          "localHeaders": { "Content-Type": "text/plain" },
+          "status_code": 200,
+          "response": "asdasd"
+        },
+        {
+          "method": "post",
+          "endpoint": "test",
+          "status_code": 500
+        }
+      ]
+    },
+    {
+      "name": "api1",
+      "endpoints": [
+        {
+          "method": "get",
+          "endpoint": "test1",
+          "status_code": 200
+        },
+        {
+          "method": "get",
+          "endpoint": "test",
+          "status_code": 500
+        }
+      ]
+    }
+  ]
+}
