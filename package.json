@@ -1,6 +1,6 @@
 {
-  "name": "mocker",
-  "version": "1.0.0",
+  "name": "@tejasvp25/api-mocker",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,29 @@
   },
   "author": "Tejasvp25",
   "license": "MIT",
+  "homepage": "https://github.com/Tejasvp25/Api-Mocker#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tejasvp25/Api-Mocker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Tejasvp25/Api-Mocker/issues"
+  },
+  "engines": {
+    "npm": ">=5.5.0",
+    "node": ">=9.3.0"
+  },
+  "keywords": [
+    "JSON",
+    "api",
+    "test",
+    "mock",
+    "mocker",
+    "fake-response",
+    "request",
+    "reponse",
+    "nodejs"
+  ],
   "dependencies": {
     "minimist": "^1.2.5"
   }
