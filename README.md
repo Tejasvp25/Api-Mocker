@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to Api-mocker 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0.1-blue.svg?cacheSeconds=2592000" />
   <img src="https://img.shields.io/badge/npm-%3E%3D5.5.0-blue.svg" />
   <img src="https://img.shields.io/badge/node-%3E%3D9.3.0-blue.svg" />
   <a href="https://github.com/Tejasvp25/Api-Mocker#readme" target="_blank">
@@ -14,7 +14,7 @@
   </a>
 </p>
 
-> Simple HTTP Server to Mock JSON Api Response
+> Simple HTTP Server to Mock JSON Api Response. It will fakt simulate API responses with Minimum work and Configuration.
 
 ## Prerequisites
 
