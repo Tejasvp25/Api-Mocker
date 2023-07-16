@@ -43,5 +43,5 @@ export const printBanner = () => {
   console.log("##     ## ##     ## ##    ## ##   ##  ##       ##    ##  ");
   console.log("##     ##  #######   ######  ##    ## ######## ##     ## ");
 
-  console.log("\n\x1b[31m By Tejasvp25\x1b[0m");
+  console.log("\n\x1b[31m By Tejasvp25\x1b[0m\n");
 };

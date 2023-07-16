@@ -46,8 +46,12 @@ export default class CustomRouter {
   #mapping = new Map();
 
   on = function (method, url, callback) {
-    this.#listeners[method].push({ url, callback });
-    this.#mapping.set(url, this.#listeners[method].length - 1);
+    if (this.#mapping.has(url)) {
+      console.error(`Error : Duplicate ${url} : Ignoring Endpoint`);
+    } else {
+      this.#listeners[method].push({ url, callback });
+      this.#mapping.set(url, this.#listeners[method].length - 1);
+    }
   };
 
   route = function (req, res, time = Date.now()) {
