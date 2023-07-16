@@ -5,7 +5,7 @@ const { CustomRouter } = require("./CustomRouter");
 const router = new CustomRouter();
 const http = require("http");
 const { validateHeaders, getGroupEndpoints, printBanner } = require("./utils");
-var argv = require("minimist")(process.argv.slice(2));
+const argv = require("minimist")(process.argv.slice(2));
 
 const fileName = argv["config"] || "example.json";
 if (!fs.existsSync(fileName)) {
@@ -22,7 +22,7 @@ const globalheaders = jsonData["globalHeaders"];
 const groupEndpoints = getGroupEndpoints(jsonData["groups"]);
 const independentEndpoints = jsonData["endpoint"];
 
-var endpoints = [];
+let endpoints = [];
 
 printBanner();
 
@@ -71,8 +71,8 @@ const portno = argv["port"] || 8080;
 
 http
   .createServer(function (req, res) {
-    router.route(req, res);
+    router.route(req, res, Date.now());
   })
   .listen(portno);
 
-console.log(`Listening at port ${portno}`);
+console.log(`Listening at port ${portno}\n`);
