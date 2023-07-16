@@ -169,7 +169,7 @@ node index.js --port=2000 --config=example.json --configType=json
 
 👤 **Tejasvp25**
 
-- Website: http://thetejasvp25.tech
+- Website: https://tejasvp25.github.io
 - Github: [@Tejasvp25](https://github.com/Tejasvp25)
 - Gmail ID: tejasvp25@gmail.com
 
