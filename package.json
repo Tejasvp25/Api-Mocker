@@ -34,6 +34,7 @@
     "nodejs"
   ],
   "dependencies": {
+    "js-yaml": "^4.1.0",
     "minimist": "^1.2.5"
   }
 }

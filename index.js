@@ -4,24 +4,47 @@ import { createServer } from "http";
 import { validateHeaders, getGroupEndpoints, printBanner } from "./utils.js";
 import minimist from "minimist";
 import CustomRouter from "./CustomRouter.js";
+import { load } from "js-yaml";
 
 const router = new CustomRouter();
 const argv = minimist(process.argv.slice(2));
 
 const fileName = argv["config"] || "example.json";
+const configType = argv["configType"] || "json";
 if (!existsSync(fileName)) {
   console.log("GIVEN CONFIG FILE DOESN'T EXISTS");
   exit(0);
 }
-const data = readFileSync(fileName);
-if (data.length === 0) {
+const rawData = readFileSync(fileName);
+if (rawData.length === 0) {
   console.error("CONFIG FILE IS EMPTY");
   exit(0);
 }
-const jsonData = JSON.parse(data);
-const globalheaders = jsonData["globalHeaders"];
-const groupEndpoints = getGroupEndpoints(jsonData["groups"]);
-const independentEndpoints = jsonData["endpoint"];
+
+let data = undefined;
+
+try {
+  const type = configType?.toLocaleLowerCase();
+  if (type === "json") {
+    data = JSON.parse(rawData);
+  } else if (type === "yaml") {
+    data = load(rawData);
+  } else {
+    throw new Error("\nInvalid configType Provided \nMust be JSON or YAML\n");
+  }
+} catch (error) {
+  console.error(error?.message);
+  exit(0);
+}
+
+if (data === undefined) {
+  console.error("Unable to Load Configuration from file");
+  exit(0);
+}
+
+const globalheaders = data["globalHeaders"];
+const groupEndpoints = getGroupEndpoints(data["groups"]);
+const independentEndpoints = data["endpoint"];
 
 let endpoints = [];
 

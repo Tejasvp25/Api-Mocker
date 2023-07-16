@@ -27,7 +27,7 @@
 npm i @tejasvp25/api-mocker
 ```
 
-## Sample Config
+## Sample Config - JSON
 
 ```sh
 #   Global Headers will be set to Every endpoint response ( Can be overidden by Local Header )
@@ -104,20 +104,66 @@ npm i @tejasvp25/api-mocker
 
 ```
 
+## Sample Config - YAML
+
+```sh
+#   Global Headers will be set to Every endpoint response ( Can be overidden by Local Header )
+#   "method" defines the type of Request
+#   "status_code" defines the Status Code returned
+#   "response" defines the Response to specific endpoint
+
+---
+globalHeaders:
+  Content-Size: 100
+endpoint:
+- endpoint: "/api/test3"
+  method: get
+  localHeaders:
+    Content-Type: application/json
+  status_code: 200
+  response:
+    name: ABC
+    age: 19
+groups:
+- name: api
+  endpoints:
+  - method: get
+    endpoint: test1
+    localHeaders:
+      Content-Type: text/plain
+    status_code: 200
+    response: asdasd
+  - method: post
+    endpoint: test
+    status_code: 500
+- name: api1
+  endpoints:
+  - method: get
+    endpoint: test1
+    status_code: 200
+  - method: get
+    endpoint: test
+    status_code: 500
+
+
+
+```
+
 ## Usage
 
 ```sh
-npm run start -- --port=2000 --config=example.json
+npm run start -- --port=2000 --config=example.json --configType=json
 ```
 
 OR
 
 ```sh
-node index.js --port=2000 --config=example.json
+node index.js --port=2000 --config=example.json --configType=json
 ```
 
 - **--port** denotes the Port Number to Run Server
 - **--config** denotes the filename of Config
+- **--configType (Optional)** Use JSON/YAML config type (Default to json)
 
 ## Author
 
@@ -141,5 +187,5 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2021 [Tejasvp25](https://github.com/Tejasvp25).<br />
+Copyright © 2023 [Tejasvp25](https://github.com/Tejasvp25).<br />
 This project is [MIT](https://github.com/Tejasvp25/Api-Mocker/blob/master/LICENSE) licensed.
