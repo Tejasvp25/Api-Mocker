@@ -14,7 +14,7 @@
   </a>
 </p>
 
-> Simple HTTP Server to Mock JSON Api Response. It will fakt simulate API responses with Minimum work and Configuration.
+> Simple HTTP Server to Mock JSON Api Response. It will simulate API responses with Minimum work and Configuration.
 
 ## Prerequisites
 
