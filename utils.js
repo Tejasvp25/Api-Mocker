@@ -34,7 +34,7 @@ function getGroupEndpoints(jsonData) {
 
 function printBanner() {
   console.log(
-    "\033[34m##     ##  #######   ######  ##    ## ######## ########  "
+    "\x1b[34m##     ##  #######   ######  ##    ## ######## ########  "
   );
   console.log("###   ### ##     ## ##    ## ##   ##  ##       ##     ## ");
   console.log("#### #### ##     ## ##       ##  ##   ##       ##     ## ");
