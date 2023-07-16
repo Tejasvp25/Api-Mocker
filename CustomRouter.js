@@ -1,7 +1,7 @@
-const url = require("url");
+import { parse } from "url";
 
-const CustomRouter = function () {
-  this.listeners = {
+export default class CustomRouter {
+  #listeners = {
     ACL: [],
     BIND: [],
     CHECKOUT: [],
@@ -38,40 +38,38 @@ const CustomRouter = function () {
     UNSUBSCRIBE: [],
   };
 
-  this.errorListener = function (req, res) {
+  #errorListener = function (req, res) {
     res.writeHead(404);
     res.end();
   };
 
-  this.mapping = new Map();
-};
+  #mapping = new Map();
 
-CustomRouter.prototype.on = function (method, url, callback) {
-  this.listeners[method].push({ url, callback });
-  this.mapping.set(url, this.listeners[method].length - 1);
-};
+  on = function (method, url, callback) {
+    this.#listeners[method].push({ url, callback });
+    this.#mapping.set(url, this.#listeners[method].length - 1);
+  };
 
-CustomRouter.prototype.route = function (req, res, time = Date.now()) {
-  const pathname = url.parse(req.url, true).pathname;
-  const callback = this.getListener(pathname, req.method.toUpperCase());
+  route = function (req, res, time = Date.now()) {
+    const pathname = parse(req.url, true).pathname;
+    const callback = this.#getListener(pathname, req.method.toUpperCase());
 
-  if (callback === undefined) {
-    this.errorListener(req, res);
-  } else {
-    callback(req, res);
-  }
-
-  console.log(`${req.url}: Request took ${Date.now() - time}ms`);
-};
-
-CustomRouter.prototype.getListener = function (url, method) {
-  if (this.mapping.has(url)) {
-    const index = this.mapping.get(url);
-    if (this.listeners[method][index].url === url) {
-      return this.listeners[method][index].callback;
+    if (callback === undefined) {
+      this.#errorListener(req, res);
+    } else {
+      callback(req, res);
     }
-  }
-  return undefined;
-};
 
-module.exports = { CustomRouter };
+    console.log(`${req.url}: Request took ${Date.now() - time}ms`);
+  };
+
+  #getListener = function (url, method) {
+    if (this.#mapping.has(url)) {
+      const index = this.#mapping.get(url);
+      if (this.#listeners[method][index].url === url) {
+        return this.#listeners[method][index].callback;
+      }
+    }
+    return undefined;
+  };
+}

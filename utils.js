@@ -1,8 +1,8 @@
-const { validateHeaderName, validateHeaderValue } = require("http");
+import { validateHeaderName, validateHeaderValue } from "http";
 
-function validateHeaders(headers) {
-  headerEntries = Object.entries(headers);
-  for (i of headerEntries) {
+export const validateHeaders = (headers) => {
+  const headerEntries = Object.entries(headers);
+  for (const i of headerEntries) {
     try {
       validateHeaderName(i[0]);
       validateHeaderValue(i[0], i[1]);
@@ -10,18 +10,18 @@ function validateHeaders(headers) {
       console.log(error);
     }
   }
-}
+};
 
-function getGroupEndpoints(jsonData) {
+export const getGroupEndpoints = (jsonData) => {
   const endpoints = [];
   jsonData.map((e) => {
-    var name = e["name"].startsWith("/") ? e["name"] : `/${e["name"]}`;
+    let name = e["name"].startsWith("/") ? e["name"] : `/${e["name"]}`;
     if (name.endsWith("/")) {
       name = name.substring(0, name.length - 1);
     }
 
     e["endpoints"].forEach((obj) => {
-      var endpoint = obj["endpoint"];
+      let endpoint = obj["endpoint"];
       if (!endpoint.startsWith("/")) {
         endpoint = `/${endpoint}`;
       }
@@ -30,9 +30,9 @@ function getGroupEndpoints(jsonData) {
     });
   });
   return endpoints;
-}
+};
 
-function printBanner() {
+export const printBanner = () => {
   console.log(
     "\x1b[34m##     ##  #######   ######  ##    ## ######## ########  "
   );
@@ -44,10 +44,4 @@ function printBanner() {
   console.log("##     ##  #######   ######  ##    ## ######## ##     ## ");
 
   console.log("\n\x1b[31m By Tejasvp25\x1b[0m");
-}
-
-module.exports = {
-  validateHeaders,
-  getGroupEndpoints,
-  printBanner,
 };

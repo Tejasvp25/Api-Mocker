@@ -1,6 +1,7 @@
 {
   "name": "@tejasvp25/api-mocker",
   "version": "1.0.1",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {

@@ -1,18 +1,19 @@
-"use strict";
-const fs = require("fs");
-const { exit } = require("process");
-const { CustomRouter } = require("./CustomRouter");
+import { existsSync, readFileSync } from "fs";
+import { exit } from "process";
+import { createServer } from "http";
+import { validateHeaders, getGroupEndpoints, printBanner } from "./utils.js";
+import minimist from "minimist";
+import CustomRouter from "./CustomRouter.js";
+
 const router = new CustomRouter();
-const http = require("http");
-const { validateHeaders, getGroupEndpoints, printBanner } = require("./utils");
-const argv = require("minimist")(process.argv.slice(2));
+const argv = minimist(process.argv.slice(2));
 
 const fileName = argv["config"] || "example.json";
-if (!fs.existsSync(fileName)) {
+if (!existsSync(fileName)) {
   console.log("GIVEN CONFIG FILE DOESN'T EXISTS");
   exit(0);
 }
-const data = fs.readFileSync(fileName);
+const data = readFileSync(fileName);
 if (data.length === 0) {
   console.error("CONFIG FILE IS EMPTY");
   exit(0);
@@ -69,10 +70,8 @@ endpoints.forEach((e) => {
 
 const portno = argv["port"] || 8080;
 
-http
-  .createServer(function (req, res) {
-    router.route(req, res, Date.now());
-  })
-  .listen(portno);
+createServer(function (req, res) {
+  router.route(req, res, Date.now());
+}).listen(portno);
 
 console.log(`Listening at port ${portno}\n`);
